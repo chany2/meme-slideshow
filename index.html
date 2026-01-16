@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Manager Memes Slideshow</title>
+    <style>
+        body { margin: 0; font-family: Arial; background: #f5f5f5; }
+        .slideshow { max-width: 800px; margin: auto; position: relative; }
+        .slide { display: none; width: 100%; }
+        .slide.active { display: block; }
+        .slide img { width: 100%; height: auto; border-radius: 8px; }
+        .prev, .next { position: absolute; top: 50%; background: rgba(0,0,0,0.5); color: white; border: none; padding: 16px; cursor: pointer; font-size: 18px; }
+        .prev { left: 10px; }
+        .next { right: 10px; }
+        .dots { text-align: center; padding: 10px; }
+        .dot { display: inline-block; width: 12px; height: 12px; margin: 0 5px; background: #bbb; border-radius: 50%; cursor: pointer; }
+        .dot.active { background: #717171; }
+    </style>
+</head>
+<body>
+    <div class="slideshow">
+        <!-- Replace with your image URLs -->
+        <div class="slide active"><img src="https://your-meme-1.jpg" alt="PM Meme 1"></div>
+        <div class="slide"><img src="https://your-meme-2.jpg" alt="PM Meme 2"></div>
+        <!-- Add 48 more... -->
+        <button class="prev" onclick="changeSlide(-1)">❮</button>
+        <button class="next" onclick="changeSlide(1)">❯</button>
+        <div class="dots-container">
+            <span class="dot active" onclick="currentSlide(1)"></span>
+            <!-- Add dots dynamically via JS -->
+        </div>
+    </div>
+    <script>
+        let slideIndex = 1;
+        showSlides();
+        function showSlides(n) {
+            let slides = document.querySelectorAll('.slide');
+            let dots = document.querySelectorAll('.dot');
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            slides[slideIndex-1].classList.add('active');
+            if (dots[slideIndex-1]) dots[slideIndex-1].classList.add('active');
+        }
+        function changeSlide(n) { showSlides(slideIndex += n); }
+        function currentSlide(n) { showSlides(slideIndex = n); }
+        setInterval(() => changeSlide(1), 4000); // Auto-advance
+    </script>
+</body>
+</html>
